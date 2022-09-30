@@ -1,11 +1,12 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError, OperationalError
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
+
+
 
 from User.forms import linkEmpleadoForm
 from User.models import Empleado
@@ -14,7 +15,10 @@ from User.models import Empleado
 # Create your views here.
 
 def home(request):
-    epa = Empleado.objects.get(cuenta_usuario=request.user)
+    if request.user.id != None:
+        epa = Empleado.objects.get(cuenta_usuario=request.user)
+    else:
+        epa = "Visitante"
     return render(request, 'home.html',{
         'epa': epa
     })

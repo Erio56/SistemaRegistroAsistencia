@@ -20,23 +20,32 @@ def create_asistencia(request):
     if request.method == 'GET':
         return render(request, 'createasistencia.html', {
             'form': createAsistenciaForm,
-            'epa':epa
+            'epa':epa,
+            'home_flag': True,
         })
     else:
-        form = createAsistenciaForm(request.POST)
-        push = form.save(commit=False)
-        push.cedula = Empleado.objects.get(cuenta_usuario=request.user)
-        push.save()
-        return render(request, 'createasistencia.html',{
-            'epa': epa,
-            'form': createAsistenciaForm
-        })
+        try:
+            form = createAsistenciaForm(request.POST)
+            push = form.save(commit=False)
+            print(push)
+            push.cedula = Empleado.objects.get(cuenta_usuario=request.user)
+            push.save()
+            return render(request, 'createasistencia.html',{
+                'epa': epa,
+                'form': createAsistenciaForm,
+                'success': True
+            })
+        except Exception as e:
+            return render(request, 'createasistencia.html',{
+                'epa': epa,
+                'form': createAsistenciaForm,
+                'success': False
+            })
 
 
 @login_required
 def listAsistencias(request):
     assists = Asistencia_Empleado.objects.filter( cedula = Empleado.objects.get(cuenta_usuario=request.user))
     epa = Empleado.objects.get(cuenta_usuario=request.user)
-    print(epa)
     return render(request, 'listAsistencia.html', {'Asistencias': assists,
                                                    'epa': epa })

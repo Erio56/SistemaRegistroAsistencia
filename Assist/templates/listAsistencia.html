@@ -2,18 +2,21 @@
 {% block content %}
 {% load static %}
 <div class="container is-is-max-desktop mb-6 pl-6">
-    <h1 class="title">Asistencias</h1>
+    <p class="title">Asistencias</p>
 </div>
 
 {% load tz %}
 
 <div class="container is-max-desktop">
-{% for empleado in Asistencias %}
-    <h1 class="box">{{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}} 
-        {% if empleado.observacion != "" %}
-            <strong>- Observación: </strong>{{empleado.observacion}}</h1>
+    <div class="box">
+        {% for empleado in Asistencias %}
+        <h1 class="block">✅ {{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}}
+            {% if empleado.observacion != "" %}
+            <strong>- Observación: </strong>{{empleado.observacion}}
+        </h1>
         {% endif %}
-{% endfor %}
+        {% endfor %}
+    </div>
 </div>
-<img src="{% static 'conejito.gif'%}" alt="conejito malo"></img>
+
 {% endblock %}
