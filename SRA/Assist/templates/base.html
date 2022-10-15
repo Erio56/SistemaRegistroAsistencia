@@ -20,28 +20,41 @@
         <a class="navbar-item" href="/"><img src="{% static 'Univalle.svg'%} " width="60" height="50"></a>
 
     {% if user.is_authenticated %}
+        <!-assist navbar menu--> 
         <div class="navbar-start">
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Asistencia
-          </a>
-
+          <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Asistencia</a>
           <div class="navbar-dropdown">
             <a class="navbar-item" href="/asistencia/marcar">Registrar asistencia</a>
             <a class="navbar-item" href="/asistencia/listar">Ver registro de asistencia</a>
           </div>
         </div>
+        <!-admin navbar menu--> 
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Admin</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/admin/createCargo">Crear cargo</a>
+            <a class="navbar-item" href="/admin/createDependencia">Crear dependencia</a>
+          </div>
+        </d>
       </div>
+
+
+
+
+
+
+      
     </div>
+    <!-login out navbar button--> 
     <div class="navbar-end">
-      <div class="navbar-item"><strong> Bienvenido {{epa.nombres}} {{epa.apellidos}}</strong></div>
+      <div class="navbar-item"><strong>{{epa.nombres}} {{epa.apellidos}}</strong></div>
       <div class="navbar-item">
         <div class="buttons">
           <a class="button is-primary" href="/logout">Log out</a>
         </div>
-      </div>
+      </di/v>
     </div>
-
 
     {% else %}
     <div class="navbar-end">
@@ -54,7 +67,6 @@
       </div>
     </div>
     {% endif %}
-    </div>
     </div>
   </nav>
 

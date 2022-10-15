@@ -1,27 +1,27 @@
+import re
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError, OperationalError
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
 
-
-
-from User.forms import linkEmpleadoForm
-from User.models import Empleado
+from User.forms import createDependenciaForm, linkEmpleadoForm, createCargoForm
+from User.models import Cargo, Empleado, Dependencia
 
 
 # Create your views here.
+
 
 def home(request):
     if request.user.id != None:
         epa = Empleado.objects.get(cuenta_usuario=request.user)
     else:
         epa = "Visitante"
-    return render(request, 'home.html',{
+    return render(request, 'home.html', {
         'epa': epa
     })
+
 
 def signUp(request):
     if request.method == 'GET':
@@ -89,4 +89,54 @@ def signIn(request):
         else:
             login(request, user)
             return redirect(home)
+
+@login_required
+def createCargo(request):
+    if request.method == 'GET':
+        return render(request, 'createCargo.html', {
+            'form': createCargoForm,
+        })
+    elif request.method == 'POST':
+        try:
+            cargo_temp = Cargo(nombre_cargo=request.POST['nombre_cargo'], dependencia=Dependencia.objects.get(id=request.POST['dependencia']))
+            cargo_temp.save()
+            return render(request, 'createCargo.html', {
+                'form': createCargoForm,
+                'status': 'Registrado correctamente'
+            })
+        except IntegrityError:
+            return render(request, 'createCargo.html', {
+                'form': createCargoForm,
+                'status': 'Error: el cargo ya existe'
+            })
+    else:
+        return render(request, 'createCargo.html', {
+            'form': createCargoForm,
+            'status': 'Hubo un error en el sistema.'
+        })
         
+        
+@login_required
+def createDependencia(request):
+    if request.method == 'GET':
+        return render(request, 'createDependencia.html', {
+            'form': createDependenciaForm,
+        })
+    elif request.method == 'POST':
+        try:
+            dependencia_temp = Dependencia(nombre_dependencia=request.POST['nombre_dependencia'])
+            dependencia_temp.save()
+            return render(request, 'createDependencia.html', {
+                'form': createDependenciaForm,
+                'status': 'Registrado correctamente'
+            })
+        except IntegrityError:
+            return render(request, 'createDependencia.html', {
+                'form': createDependenciaForm,
+                'status': 'Error: el cargo ya existe'
+            })
+    else:
+        return render(request, 'createDependencia.html', {
+            'form': createDependenciaForm,
+            'status': 'Hubo un error en el sistema.'
+        })

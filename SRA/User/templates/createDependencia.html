@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div>
+   <form action="/admin/createDependencia" method="POST">
+      {{error}}
+      {{form.as_p}}
+      {% csrf_token %}
+      <div class="buttons">
+         <button class="button is-primary">
+            Crear
+         </button>
+      </div>
+   </form>
+ </div>
+
+{% endblock  %}

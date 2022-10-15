@@ -29,6 +29,19 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,6 +55,7 @@ INSTALLED_APPS = [
     'User',
     'Course',
     'Vacation_Permit',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -83,9 +97,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'SRA',
         'USER': 'postgres',
-        'PASSWORD': 'poggerssql',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': 5432,
+        'PORT': 5430,
     }
 }
 
@@ -129,7 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

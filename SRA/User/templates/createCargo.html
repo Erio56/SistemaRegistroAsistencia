@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action='/admin/createCargo/' method='POST'>
+  <div>
+    {{error}}
+    {{status}}
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="buttons">
+      <button class="button is-primary">
+        Crear
+      </button>
+    </div>
+    
+  </div>
+</form>
+
+{% endblock %}

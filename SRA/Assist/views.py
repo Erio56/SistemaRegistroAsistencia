@@ -45,7 +45,7 @@ def create_asistencia(request):
 
 @login_required
 def listAsistencias(request):
-    assists = Asistencia_Empleado.objects.filter( cedula = Empleado.objects.get(cuenta_usuario=request.user))
+    assists = Asistencia_Empleado.objects.filter( cedula = Empleado.objects.get(cuenta_usuario=request.user)).order_by('-fecha_hora_asitencia')
     epa = Empleado.objects.get(cuenta_usuario=request.user)
     return render(request, 'listAsistencia.html', {'Asistencias': assists,
                                                    'epa': epa })

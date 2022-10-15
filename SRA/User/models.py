@@ -14,6 +14,9 @@ class Dependencia(models.Model):
         blank=False,
         max_length=1
         )
+    def __str__(self):
+        return self.nombre_dependencia
+
 
 class Cargo(models.Model):
     nombre_cargo = models.CharField(
@@ -27,8 +30,9 @@ class Cargo(models.Model):
         null=False,
         blank=False,
         max_length=1,
-        default='A'
         )
+    def __str__(self):
+        return self.nombre_cargo
     
 class Empleado(models.Model):
     cuenta_usuario= models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -79,4 +83,4 @@ class Empleado(models.Model):
     email =  models.EmailField()
     cargo = models.ManyToManyField(Cargo, related_name='fk_dependencia')
     def __str__(self):
-        return self.nombres + ' ' + self.apellidos    
+        return self.nombres + ' ' + self.apellidos
