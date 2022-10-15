@@ -11,38 +11,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body>
-  <nav class="navbar is-light mb-6" role="navigation" aria-label="main navigation">
-    <div id="navbarBasicExample" class="navbar-menu">
-      <a class="navbar-item" href="/"><img src="{% static 'Univalle.svg'%} " width="60" height="50"></a>
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
 
-      {% if user.is_authenticated %}
-      <div class="navbar-start">
-        <div class="navbar-item has-dropdown is-hoverable">
+    <div id="navbarBasicExample" class="navbar-menu">
+        <a class="navbar-item" href="/"><img src="{% static 'Univalle.svg'%} " width="60" height="50"></a>
+
+    {% if user.is_authenticated %}
+        <!-assist navbar menu--> 
+        <div class="navbar-start">
+          <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Asistencia</a>
           <div class="navbar-dropdown">
             <a class="navbar-item" href="/asistencia/marcar">Registrar asistencia</a>
             <a class="navbar-item" href="/asistencia/listar">Ver registro de asistencia</a>
           </div>
         </div>
+        <!-admin navbar menu--> 
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Admin</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/admin/createCargo">Crear cargo</a>
+            <a class="navbar-item" href="/admin/createDependencia">Crear dependencia</a>
+          </div>
+        </d>
       </div>
+
+
+
+
+
+
+      
     </div>
+    <!-login out navbar button--> 
     <div class="navbar-end">
-      <div class="navbar-item is-small"><strong>{{epa.nombres}} {{epa.apellidos}}</strong></div>
+      <div class="navbar-item"><strong>{{epa.nombres}} {{epa.apellidos}}</strong></div>
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" href="/logout">Cerrar sesión</a>
+          <a class="button is-primary" href="/logout">Log out</a>
         </div>
-      </div>
+      </di/v>
     </div>
 
     {% else %}
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="navbar-item is-small">Bienvenido visitante</div>
         <div class="buttons">
           <a class="button is-primary" href="/signin">
             <strong>Iniciar sesión</strong></a>
@@ -52,28 +68,11 @@
     </div>
     {% endif %}
     </div>
-    </div>
   </nav>
 
   {% block content %}
   {% endblock %}
-  
-  <div class="main">
-    <div class="section"></div>
-    <footer class="footer has-">
-      <div class="content has-text-centered">
-        <p>
-          <strong>SRA</strong> hecho por <a href="https://github.com/Erio56">Brayan Andrés Cataño Sánchez</a> y Felipe
-          Muñoz.
-        </p>
-        <img src="{% static 'Univalle.svg'%} " width="60" height="50">
-        <p>sede Yumbo</p>
-      </div>
-    </footer>  
-  </div>
- 
+  <script src="" async defer></script>
 </body>
-
-<script src="" async defer></script>
 
 </html>

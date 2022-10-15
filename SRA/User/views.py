@@ -6,8 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError, OperationalError
 from django.contrib.auth.decorators import login_required
 
-from User.forms import linkEmpleadoForm
-from User.models import Empleado
+from User.forms import createDependenciaForm, linkEmpleadoForm, createCargoForm
+from User.models import Cargo, Empleado, Dependencia
 
 
 # Create your views here.
@@ -90,7 +90,53 @@ def signIn(request):
             login(request, user)
             return redirect(home)
 
-
-#def linkRol(request):
-   #todo
+@login_required
+def createCargo(request):
+    if request.method == 'GET':
+        return render(request, 'createCargo.html', {
+            'form': createCargoForm,
+        })
+    elif request.method == 'POST':
+        try:
+            cargo_temp = Cargo(nombre_cargo=request.POST['nombre_cargo'], dependencia=Dependencia.objects.get(id=request.POST['dependencia']))
+            cargo_temp.save()
+            return render(request, 'createCargo.html', {
+                'form': createCargoForm,
+                'status': 'Registrado correctamente'
+            })
+        except IntegrityError:
+            return render(request, 'createCargo.html', {
+                'form': createCargoForm,
+                'status': 'Error: el cargo ya existe'
+            })
+    else:
+        return render(request, 'createCargo.html', {
+            'form': createCargoForm,
+            'status': 'Hubo un error en el sistema.'
+        })
         
+        
+@login_required
+def createDependencia(request):
+    if request.method == 'GET':
+        return render(request, 'createDependencia.html', {
+            'form': createDependenciaForm,
+        })
+    elif request.method == 'POST':
+        try:
+            dependencia_temp = Dependencia(nombre_dependencia=request.POST['nombre_dependencia'])
+            dependencia_temp.save()
+            return render(request, 'createDependencia.html', {
+                'form': createDependenciaForm,
+                'status': 'Registrado correctamente'
+            })
+        except IntegrityError:
+            return render(request, 'createDependencia.html', {
+                'form': createDependenciaForm,
+                'status': 'Error: el cargo ya existe'
+            })
+    else:
+        return render(request, 'createDependencia.html', {
+            'form': createDependenciaForm,
+            'status': 'Hubo un error en el sistema.'
+        })
