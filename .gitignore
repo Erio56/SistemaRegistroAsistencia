@@ -8,8 +8,10 @@ media
 __init__.py
 
 # Backup files # 
-*.bak 
-
+*.bak
+.vscode 
+#virtual enviroment
+virtualenv
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml
