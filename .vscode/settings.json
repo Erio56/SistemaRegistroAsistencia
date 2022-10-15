@@ -1,7 +1,0 @@
-{
-    "editor.fontFamily": "Cascadia Code",
-    "editor.fontSize": 12,
-    "files.autoSave": "onFocusChange",
-    "editor.codeLensFontFamily": "Cascadia Code",
-    "terminal.integrated.fontFamily": "Cascadia Code"
-}
