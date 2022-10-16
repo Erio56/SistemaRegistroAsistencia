@@ -15,7 +15,6 @@
 
 <body>
   <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-
     <div id="navbarBasicExample" class="navbar-menu">
         <a class="navbar-item" href="/"><img src="{% static 'Univalle.svg'%} " width="60" height="50"></a>
 
@@ -36,20 +35,18 @@
             <a class="navbar-item" href="/admin/createCargo">Crear cargo</a>
             <a class="navbar-item" href="/admin/createDependencia">Crear dependencia</a>
           </div>
-        </d>
+        </div>
       </div>
 
-      
-    </div>
-    <!-login out navbar button--> 
+
     <div class="navbar-end">
-      <div class="navbar-item"><strong>{{epa.nombres}} {{epa.apellidos}}</strong></div>
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary" href="/logout">Log out</a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-item"><strong>{{epa.nombres}} {{epa.apellidos}}</strong></a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="/user/update">Actualizar datos</a>
+          <a class="navbar-item" href="/logout">Cerrar sesión</a>
         </div>
-      </di/v>
-    </div>
+      </div>
 
     {% else %}
     <div class="navbar-end">

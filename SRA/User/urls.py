@@ -22,5 +22,6 @@ urlpatterns = [
     path('signup/', views.signUp, name='signup'),
     path('admin/createDependencia', views.createDependencia, name='createDependencia'),
     path('admin/createCargo/', views.createCargo, name='createCargo'),
+    path('user/update', views.updateUser, name='updateUser'),
     path('', views.home, name='home'),
 ]
