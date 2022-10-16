@@ -25,8 +25,9 @@ class createDependenciaForm(ModelForm):
 class linkEmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['nombres', 'cedula', 'apellidos', 'direccion', 'telefono', 'fecha_nacimiento']
+        fields = ['nombres', 'cedula', 'apellidos', 'direccion', 'telefono', 'fecha_nacimiento', 'cargo']
         widgets = {
+            
             'fecha_nacimiento': forms.DateInput(
                 format=('%D-%M-%Y'),
                 attrs={
