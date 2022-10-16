@@ -12,6 +12,7 @@ __init__.py
 .vscode 
 #virtual enviroment
 virtualenv
+migrations
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml
