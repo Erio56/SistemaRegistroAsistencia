@@ -1,7 +1,13 @@
 from tkinter import Widget
+from turtle import textinput
 from django.forms import ModelForm, fields
 from django import forms
 from .models import Cargo, Dependencia, Empleado
+
+
+from django.forms import ModelChoiceField
+
+
 
 
 # class linkEmpleadoCargoForm(ModelForm):
@@ -25,15 +31,34 @@ class createDependenciaForm(ModelForm):
 class linkEmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['nombres', 'cedula', 'apellidos', 'direccion', 'telefono', 'fecha_nacimiento', 'cargo']
+        fields = ['nombres', 'apellidos', 'direccion', 'telefono', 'fecha_nacimiento','cedula', 'cargo', 'email']
         widgets = {
+            'cedula': forms.NumberInput(attrs={
+                'class':'input'}) ,
+            'nombres': forms.TextInput(attrs={
+                'class':'input'
+                }) , 
+            'apellidos': forms.TextInput(attrs={
+                'class':'input'
+                }),
+            'email': forms.EmailInput(attrs={
+                'class':'input'}),  
+            'direccion': forms.TextInput(attrs={
+                'class':'input'
+                }), 
+            'telefono': forms.NumberInput(attrs={
+                'class':'input'}),
             
-            'fecha_nacimiento': forms.DateInput(
-                format=('%D-%M-%Y'),
+            'cargo': forms.Select(),
+            'fecha_nacimiento': forms.DateInput(format=('%Y-%m-%d'),
                 attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Selecciona una fecha',
-                    'type': 'date'
+                    'type': 'date',
+                    'class': 'input',
+                    'min':'1900-01-01', 
+                    'max':'2100-01-01',
+                    
+                    'onfocus':'this.max=new Date().toISOString().split('"'T'"')[0]'
+                    
                     }
                 )
             }

@@ -38,7 +38,6 @@ def signUp(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 formu = linkEmpleadoForm(request.POST)
-                print(formu.is_valid())
                 form = formu.cleaned_data
                 try:
                     empleado_temp = Empleado(cedula=form['cedula'], cuenta_usuario=user, nombres=form['nombres'], apellidos=form['apellidos'],
@@ -163,13 +162,16 @@ def updateUser(request):
         })
         elif request.method == 'POST':
             try:
-                print(request.POST['cedula'])
-                empleado = get_object_or_404(Empleado, cedula=request.POST['cedula'])
+                empleado = get_object_or_404(Empleado, cuenta_usuario=request.user)
                 form2 = linkEmpleadoForm(request.POST, instance=empleado)
-                form2.save()
+                success = False
+                if form2.is_valid():
+                    form2.save()
+                    success = True
                 return render(request, 'userUpdate.html', {
                     'form': form2,
-                    'status': 'actualizado correctamente',
+                    'success': success,
+                    'status': 'Actualizado correctamente',
                     'epa': empleado
                 })
             except IntegrityError:

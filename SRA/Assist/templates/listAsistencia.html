@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<div class="container is-is-max-desktop mb-6 pl-6">
-    <p class="title">Asistencias</p>
-</div>
+<div>
+    <div class="container is-is-max-desktop mt-6 mb-6">
+        <p class="title">Asistencias</p>
+    </div>
 
-{% load tz %}
+    {% load tz %}
 
-<div class="container is-max-desktop">
-    <div class="box">
-        {% for empleado in Asistencias %}
-        <h1 class="block">✅ {{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}}
-            {% if empleado.observacion != "" %}
-            <strong>- Observación: </strong>{{empleado.observacion}}
-        </h1>
-        {% endif %}
-        {% endfor %}
+    <div class="container is-max-desktop">
+        <div class="box">
+            {% for empleado in Asistencias %}
+            <h1 class="block">✅ {{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}}
+                {% if empleado.observacion != "" %}
+                <strong>- Observación: </strong>{{empleado.observacion}}
+            </h1>
+            {% endif %}
+            {% endfor %}
+        </div>
     </div>
 </div>
-
 {% endblock %}

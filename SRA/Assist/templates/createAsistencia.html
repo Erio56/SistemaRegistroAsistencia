@@ -1,50 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container is-is-max-desktop mb-6 pl-6">
-    <p class="title">Registrar asistencia</p>
-</div>
-<form action="/asistencia/marcar" method="POST">
-    {% csrf_token %}
-    <div class="container is-max-desktop mb-5">
-        {% if home_flag != True %}
-            {% if success %}
-            <article class="message is-success">
-                <div class="message-header">
-                    <p>Epa guardado</p>
-                </div>
-                <div class="message-body">
-                    Se ha registrado <strong>correctamente</strong> la asistencia.
-                </div>
-            </article>
-            {% else %}
-            <article class="message is-danger">
-                <div class="message-header">
-                    <p>Error</p>
-                </div>
-                <div class="message-body">
-                    No se ha registrado correctamente la asistencia debido a un error interno.
-                </div>
-            </article>
-            {% endif%}
-        {% endif %}
+<div>
+    <div class="container is-is-max-desktop mt-6 mb-6">
+        <p class="title">Registrar asistencia</p>
     </div>
-    <div class="container is-max-desktop">
-        <form action="/asistencia/marcar/" method="POST">
-            <div class="box">
-
-                <div class="field">
-                    <label for="id_observacion" class="label">Observación</label>
-                    <div class="control">
-                        <input name="observacion" for="observacion" required id="id_observacion" class="input" type="text">
+    <form action="/asistencia/marcar" method="POST">
+        {% csrf_token %}
+        <div class="container is-max-desktop mb-5">
+            {% if home_flag != True %}
+                {% if success %}
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Epa guardado</p>
                     </div>
-                </div>
-                <div class="container is-max-desktop has-text-centered">
-                    <button class="button is-primary ">Marcar Asistencia</button>
-                </div>
-        </form>
+                    <div class="message-body">
+                        Se ha registrado <strong>correctamente</strong> la asistencia.
+                    </div>
+                </article>
+                {% else %}
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                    </div>
+                    <div class="message-body">
+                        No se ha registrado correctamente la asistencia debido a un error interno.
+                    </div>
+                </article>
+                {% endif%}
+            {% endif %}
+        </div>
+        <div class="container is-max-desktop">
+            <form action="/asistencia/marcar/" method="POST">
+                <div class="box">
+    
+                    <div class="field">
+                        <label for="id_observacion" class="label">Observación</label>
+                        <div class="control">
+                            <input name="observacion" for="observacion" required id="id_observacion" class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="container is-max-desktop has-text-centered">
+                        <button class="button is-primary ">Marcar Asistencia</button>
+                    </div>
+            </form>
+        </div>
     </div>
+    </form>
 </div>
 
 
-</form>
 {% endblock %}

@@ -1,18 +1,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="">
 
-   
+   <div class="container is-is-max-desktop mt-6 mb-6">
+      <p class="title">Actualizar usuario</p>
+  </div>
 
-   <form action="/user/update" method="POST">
-      {% csrf_token %}
-      {{status}}
-      {{form.as_p}}
-
-      <button>
-         Actualizar
-      </button>
-   </form>
-   
-
+   <div class="container mt-6">
+      <form action="/user/update" method="POST" class="box">
+         {% csrf_token %}
+         {% if success %}
+         <article class="message is-success">
+            <div class="message-header">
+               <p>Epa guardado</p>
+            </div>
+            <div class="message-body">
+               {{status}}
+            </div>
+         </article>
+         {% else %}
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                    </div>
+                    <div class="message-body">
+                        No se ha registrado correctamente la asistencia debido a un error interno.
+                    </div>
+                </article>
+         {% endif%}
+         <div>
+            <label class="label" for="id_nombres">Nombres</label>
+            {{form.nombres}}
+         </div>
+         <div>
+            <label class="label" for="id_apellidos">Apellidos</label>
+            <div>
+               {{form.apellidos}}
+            </div>
+         </div>
+         <div>
+            <label class="label" for="id_telefono">Telefono</label>
+            {{form.telefono}}
+         </div>
+         <div>
+            <label class="label" for="id_nacimiento">Fecha de nacimiento</label>
+               {{form.fecha_nacimiento}}
+         </div>
+         <div>
+            <label class="label" for="id_direccion">Direccion</label>
+            {{form.direccion}}
+         </div>
+         <label class="label" for="id_cargo">Seleccione el cargo</label>
+         <div class="control">
+            <div class="select">
+               {{form.cargo}}
+            </div>
+         </div>
+         <div class="buttons mt-2 is-centered">
+            <button class="button is-primary">
+               Actualizar
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
 {% endblock %}
