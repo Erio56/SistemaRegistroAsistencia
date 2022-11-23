@@ -2,13 +2,24 @@
 
 {% block content %}
 
-    <h1>singing</h1>
-    {{error}}
+
+  
+<div class="container is-max-desktop mt-6 ">
     <form action='/signin/', method='POST'>
         {% csrf_token %}
-        <h1>Iniciar sesión</h1>
-        {{form.as_p}}
-        <button>Iniciar sesión</button>
+    <div class="box">
+        <div class="field">
+            <p class="title has-text-centered">Iniciar sesión</p>
+                {{form.as_div}}
+        </div>
+        <div class="buttons mt-2 is-centered">
+            <button class="button is-primary">
+                Iniciar sesión
+            </button>
+        </div>
+    </div>
     </form>
+</div>
+
     
 {% endblock %}

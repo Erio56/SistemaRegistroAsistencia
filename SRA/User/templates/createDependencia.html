@@ -2,17 +2,21 @@
 
 {% block content %}
 
- <div>
-   <form action="/admin/createDependencia" method="POST">
-      {{error}}
-      {{form.as_p}}
-      {% csrf_token %}
-      <div class="buttons">
-         <button class="button is-primary">
-            Crear
-         </button>
-      </div>
-   </form>
+ <div class="container is-max-desktop mt-6">
+   <div class="box">
+      <form action="/admin/createDependencia" method="POST">
+         {{error}}
+         <div class="control">
+            {{form.as_div}}
+         </div>
+         {% csrf_token %}
+         <div class="buttons mt-4 is-centered">
+            <button class="button is-primary">
+               Crear dependencia
+            </button>
+         </div>
+      </form>
+   </div>
  </div>
 
 {% endblock  %}

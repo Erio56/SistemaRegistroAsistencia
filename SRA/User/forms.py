@@ -7,17 +7,30 @@ from .models import Cargo, Dependencia, Empleado
 
 from django.forms import ModelChoiceField
 
-class createCargoForm(ModelForm):
+class createCargoForm(forms.ModelForm):
     class Meta:
         model = Cargo
         fields = ['nombre_cargo', 'dependencia']
+        widgets = {
+            'nombre_cargo': forms.TextInput(attrs={
+                'class': 'input'
+            }),
+            'dependencia': forms.Select(attrs={
+                'class': 'input',
+                'placeholder': 'Seleciona una dependencia'
+            })
+        }
         
         
-        
-class createDependenciaForm(ModelForm):
+class createDependenciaForm(forms.ModelForm):
     class Meta:
         model = Dependencia
         fields = ['nombre_dependencia']
+        widgets = {
+            'nombre_dependencia': forms.TextInput(attrs={
+                'class': 'input'
+            }),
+        }
 
 
 class CreateEmpleadoForm(forms.ModelForm):
@@ -106,3 +119,30 @@ class UpdateEmpleadoForm(forms.ModelForm):
                     }
                 )
             }
+        
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
+class CustomLoginForm(AuthenticationForm):
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.fields['username'].widget.attrs.update(
+      {'class': 'input'}
+    )
+    self.fields['password'].widget.attrs.update(
+      {'class': 'input'}
+    )
+    
+class CustomUserCreationForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update(
+            {'class': 'input'}
+        )
+        self.fields['password1'].widget.attrs.update(
+            {'class': 'input'}
+        )
+        self.fields['password2'].widget.attrs.update(
+            {'class': 'input'}
+        )

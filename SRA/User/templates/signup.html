@@ -1,21 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>epa</h1>
-
 {{error}}
-<div>
-<form action="/signup/" method="POST">
-    {% csrf_token %}
-    <div>
-        {{form.as_p}}
+<div class="container is-max-desktop mt-6">
+    <div class="box">
+        <form action="/signup/" method="POST">
+            {% csrf_token %}
+            <div class="box m-3"> 
+                <p class="title">Crear cuenta usuario SRA</p>
+                <div class="control">
+                    {{form.as_div}}
+                </div>
+            </div>
+            <div class="box m-3"><div class="control">
+                <p class="title">Datos personales del empleado</p>
+                {{form2.as_div}}
+            </div></div>
+            <div class="buttons is-centered">
+                <button class="button is-primary mt-2">
+                    Crear cuenta
+                </button>
+            </div>
+            </form>
     </div>
-    <div>
-        {{form2.as_p}}
-    </div>
-    <button>
-        Crear cuenta
-    </button>
-    </form>
 </div>
 {% endblock %}

@@ -2,19 +2,26 @@
 
 {% block content %}
 
-<form action='/admin/createCargo/' method='POST'>
-  <div>
-    {{error}}
-    {{status}}
-    {% csrf_token %}
-    {{form.as_p}}
-    <div class="buttons">
-      <button class="button is-primary">
-        Crear
-      </button>
-    </div>
-    
+<div class="container is-max-desktop mt-6">
+  <div class="box">
+    <form action='/admin/createCargo/' method='POST'>
+      <div>
+        {{error}}
+        {{status}}
+        {% csrf_token %}
+        <p class="title is-centered">Crear cargo</p>
+        <div class="control">
+          {{form.as_div}}
+        </div>
+        <div class="buttons is-centered mt-4">
+          <button class="button is-primary">
+            Crear cargo
+          </button>
+        </div>
+        
+      </div>
+    </form>
   </div>
-</form>
+</div>
 
 {% endblock %}

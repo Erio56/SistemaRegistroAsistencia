@@ -7,9 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 
 
-from User.forms import createDependenciaForm, CreateEmpleadoForm, createCargoForm, UpdateEmpleadoForm
+from User.forms import CustomUserCreationForm, createDependenciaForm, CreateEmpleadoForm, createCargoForm, UpdateEmpleadoForm, CustomLoginForm
 from User.models import Cargo, Empleado, Dependencia
-
 
 # Create your views here.
 
@@ -27,7 +26,7 @@ def home(request):
 def signUp(request):
     if request.method == 'GET':
         return render(request, 'signup.html', {
-            'form': UserCreationForm,
+            'form': CustomUserCreationForm,
             'form2': CreateEmpleadoForm,
         })
     if request.method == 'POST':
@@ -44,7 +43,7 @@ def signUp(request):
 
     user.delete()
     return render(request, 'signup.html', {
-                        'form': UserCreationForm,
+                        'form': CustomUserCreationForm,
                         'form2': CreateEmpleadoForm,
                         'error': formu.errors
                     })
@@ -57,14 +56,14 @@ def signOut(request):
 def signIn(request):
     if request.method == 'GET':
         return render(request, 'signin.html', {
-            'form': AuthenticationForm,
+            'form': CustomLoginForm,
         })
     else:
         user = authenticate(
             request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
             return render(request, 'signin.html', {
-                'form': AuthenticationForm,
+                'form': CustomLoginForm,
                 'error': 'Password or user invalid',
             })
         else:
