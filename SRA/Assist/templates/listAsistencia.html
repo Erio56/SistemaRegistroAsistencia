@@ -8,15 +8,19 @@
 
     {% load tz %}
 
-    <div class="container is-max-desktop">
+    <div class="container is-max-desktop">  
         <div class="box">
+            {% if Asistencias|length != 0 %}
             {% for empleado in Asistencias %}
             <h1 class="block">✅ {{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}}
                 {% if empleado.observacion != "" %}
                 <strong>- Observación: </strong>{{empleado.observacion}}
+                {% endif %}
             </h1>
-            {% endif %}
             {% endfor %}
+            {% else %}
+                <h1 class="block"> <strong>No se han encontrado registros de asistencias, por favor registre asistencia.</strong> </h1>
+            {% endif %}
         </div>
     </div>
 </div>

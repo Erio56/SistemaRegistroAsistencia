@@ -8,7 +8,7 @@
   <title>SRA</title>
   <link rel="icon" href="{% static 'Univalle.svg'%}" type="image/x-icon">
   <meta name="Sistema de registro de Asistencia sede Yumbo" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no "/>
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
@@ -42,7 +42,7 @@
     <div class="navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-item"><strong>{{epa.nombres}} {{epa.apellidos}}</strong></a>
-        <div class="navbar-dropdown">
+        <div class="navbar-dropdown is-right">
           <a class="navbar-item" href="/user/update">Actualizar datos</a>
           <a class="navbar-item" href="/logout">Cerrar sesión</a>
         </div>

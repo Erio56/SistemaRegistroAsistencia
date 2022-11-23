@@ -16,8 +16,7 @@ class Dependencia(models.Model):
         )
     def __str__(self):
         return self.nombre_dependencia
-
-
+    
 class Cargo(models.Model):
     nombre_cargo = models.CharField(
         unique=False, 
@@ -38,7 +37,7 @@ class Empleado(models.Model):
     cuenta_usuario= models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         blank=False,
-        null=False
+        null=False,
         )
     
     cedula = models.CharField(
@@ -69,18 +68,10 @@ class Empleado(models.Model):
     telefono = models.CharField(
         unique=False, 
         null=False,
-        blank=False,
         max_length=45
     )
     fecha_nacimiento = models.DateField()
-    estado = models.CharField(        
-        unique=False, 
-        null=False,
-        blank=False,
-        max_length=1,
-        default='A'
-        )
     email =  models.EmailField()
-    cargo = models.ManyToManyField(Cargo, related_name='fk_dependencia')
+    cargo = models.ForeignKey(Cargo, null=True, blank=True, related_name='fk_dependencia', on_delete=models.CASCADE)
     def __str__(self):
         return self.nombres + ' ' + self.apellidos
