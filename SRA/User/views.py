@@ -22,7 +22,6 @@ def home(request):
         'epa': epa
     })
 
-#TODO
 def signUp(request):
     if request.method == 'GET':
         return render(request, 'signup.html', {

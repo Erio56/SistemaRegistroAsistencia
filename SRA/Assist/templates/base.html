@@ -28,6 +28,18 @@
             <a class="navbar-item" href="/asistencia/listar">Ver registro de asistencia</a>
           </div>
         </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Permisos y Vacaciones</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/asistencia/marcar">Registrar permisos</a>
+            <a class="navbar-item" href="/permiso/crear">Ver permisos</a>
+            <a class="navbar-item" href="/asistencia/marcar">Registrar Vacaciones</a>
+            <a class="navbar-item" href="/asistencia/listar">Ver Vacaciones</a>
+          </div>
+        </div>
+
+
         <!-admin navbar menu--> 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Admin</a>
@@ -63,7 +75,11 @@
   </nav>
 
   {% block content %}
+
+
+
   {% endblock %}
+
   <div class="main">
     <div class="section"></div>
     <footer class="footer has-">
