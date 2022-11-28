@@ -58,8 +58,7 @@ def signIn(request):
             'form': CustomLoginForm,
         })
     else:
-        user = authenticate(
-            request, username=request.POST['username'], password=request.POST['password'])
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
             return render(request, 'signin.html', {
                 'form': CustomLoginForm,

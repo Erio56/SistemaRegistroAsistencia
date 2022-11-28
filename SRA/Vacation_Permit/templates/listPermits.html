@@ -5,23 +5,24 @@
 {% block content %}
 
 
-<div class="box">
-   {% for PermisoEmpleado in permisos %}
-      <title>Fecha {{}}</title>   
+<div class="container is-max-desktop mt-6">
+   <div class="box">
+      {% if permisos|length == 0 %}
+        <div> <strong>No hay permisos registrados</strong></div>
+      {% else %}
+      {% for PermisoEmpleado in permisos %}
+      <div class="box">
+         <title>Fecha inicio: {{PermisoEmpleado.fecha_inicio}} hasta el día {{PermisoEmpleado.fecha_final}}</title>   
+         <div>
+            Razón del permiso: {{PermisoEmpleado.descripcion}}
+         </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+   </div>
    
-
-
-
-
-
-
-
-   {% endfor %}
 </div>
 
-
-
-{% endfor %}
 
 
 

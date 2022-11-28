@@ -1,6 +1,3 @@
-from tkinter import Widget
-from turtle import textinput
-from django.forms import ModelForm, fields
 from django import forms
 from .models import Cargo, Dependencia, Empleado
 
