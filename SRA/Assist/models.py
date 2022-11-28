@@ -7,7 +7,7 @@ class Asistencia_Empleado(models.Model):
     fecha_hora_asitencia = models.DateTimeField(auto_now_add=True)
     observacion = models.CharField(
         unique=False, 
-        null=False,
+        null=True,
         blank=True,
         max_length=45)
     def __str__(self):
