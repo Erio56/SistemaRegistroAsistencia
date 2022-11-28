@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+
+import datetime
 
 from User.models import Empleado
 from Vacation_Permit.models import PermisoEmpleado
@@ -23,6 +26,7 @@ def permition_register(request):
       user = Empleado.objects.get(cuenta_usuario=request.user)
       print(user)
       push.cedula = user
+      push.fecha_solicitud = datetime.datetime.now()
       push.save()
       success = True
       return render(request, 'createPermiso.html',{
@@ -41,8 +45,8 @@ def list_vacation(request):
 @login_required
 def list_permits(request):
    empleado = Empleado.objects.get(cuenta_usuario=request.user)
-   permits = PermisoEmpleado.objects.filter(cedula=empleado)
-   print(permits)
+   permits = PermisoEmpleado.objects.filter(cedula=empleado).order_by('-fecha_solicitud')
+   print(permits[1].is_past_due)
    return render(request, 'listPermits.html', {
       'permits': permits,
       'epa': empleado

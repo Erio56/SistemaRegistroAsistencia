@@ -13,20 +13,28 @@
       {% else %}
       {% for PermisoEmpleado in permits %}
       <div class="box">
-         <div>
-            <strong>Fecha inicio: </strong>{{PermisoEmpleado.fecha_inicio.date}} 
+         <div class="ml-3">
+            <div>
+               <span class="tag is-success is-light"><strong>Fecha inicio:&#xA0;</strong>{{PermisoEmpleado.fecha_inicio}} </span>
+               {% if PermisoEmpleado.is_past_due %}
+                  <span class="tag is-danger">Finalizó el día&#xA0;{{PermisoEmpleado.fecha_final}}</span>
+               {% else %}
+                  <span class="tag is-info is-light"><strong class="is-white">Finaliza el día:&#xA0;</strong>{{PermisoEmpleado.fecha_final}}</span>
+               {% endif %}
+            </div>
+            <article class="message mt-2">
+               <div class="message-body">
+                  Razón: {{PermisoEmpleado.descripcion}}
+               </div>
+             </article>
          </div>
-         <div>
-            <strong>Hasta el día: </strong>{{PermisoEmpleado.fecha_final.date}}
-         </div>
-         <div>
-            <strong>Razón del permiso: </strong>{{PermisoEmpleado.descripcion}}
-         </div>   
+         <span class="tag mt-2">
+            Pedido el {{PermisoEmpleado.fecha_solicitud}}
+         </span>
       </div>
       {% endfor %}
       {% endif %}
    </div>
-   
 </div>
 
 

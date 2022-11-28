@@ -8,7 +8,7 @@ class CreatePermisoForm(forms.ModelForm):
         widgets = {
            'fecha_inicio': forms.DateInput(format=('%Y-%m-%d'),
                 attrs={
-                    'type': 'date',
+                    'type': 'datetime-local',
                     'class': 'input',
                     'min':'1900-01-01', 
                     'max':'2100-01-01',
@@ -16,7 +16,7 @@ class CreatePermisoForm(forms.ModelForm):
                     }),
            'fecha_final': forms.DateInput(format=('%Y-%m-%d'),
                 attrs={
-                    'type': 'date',
+                    'type': 'datetime-local',
                     'class': 'input',
                     'min':'1900-01-01', 
                     'max':'2100-01-01',
