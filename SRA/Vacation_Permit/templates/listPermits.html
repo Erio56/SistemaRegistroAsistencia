@@ -6,16 +6,22 @@
 
 
 <div class="container is-max-desktop mt-6">
+   <p class="title">{{epa.nombres|upper}} Permisos registrados.</p>
    <div class="box">
-      {% if permisos|length == 0 %}
+      {% if permits|length == 0 %}
         <div> <strong>No hay permisos registrados</strong></div>
       {% else %}
-      {% for PermisoEmpleado in permisos %}
+      {% for PermisoEmpleado in permits %}
       <div class="box">
-         <title>Fecha inicio: {{PermisoEmpleado.fecha_inicio}} hasta el día {{PermisoEmpleado.fecha_final}}</title>   
          <div>
-            Razón del permiso: {{PermisoEmpleado.descripcion}}
+            <strong>Fecha inicio: </strong>{{PermisoEmpleado.fecha_inicio.date}} 
          </div>
+         <div>
+            <strong>Hasta el día: </strong>{{PermisoEmpleado.fecha_final.date}}
+         </div>
+         <div>
+            <strong>Razón del permiso: </strong>{{PermisoEmpleado.descripcion}}
+         </div>   
       </div>
       {% endfor %}
       {% endif %}

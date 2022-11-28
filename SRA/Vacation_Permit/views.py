@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from User.models import Empleado
+from Vacation_Permit.models import PermisoEmpleado
 from Vacation_Permit.forms import CreatePermisoForm
 # Create your views here.
 
@@ -39,5 +40,10 @@ def list_vacation(request):
 
 @login_required
 def list_permits(request):
-   
-   return render(request, 'listPermits.html')
+   empleado = Empleado.objects.get(cuenta_usuario=request.user)
+   permits = PermisoEmpleado.objects.filter(cedula=empleado)
+   print(permits)
+   return render(request, 'listPermits.html', {
+      'permits': permits,
+      'epa': empleado
+   })
