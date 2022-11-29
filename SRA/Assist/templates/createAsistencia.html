@@ -18,17 +18,23 @@
                     </div>
                 </article>
                 {% else %}
-                <article class="message is-danger">
+                <article class="message is-success">
                     <div class="message-header">
                         <p>Error</p>
                     </div>
                     <div class="message-body">
-                        No se ha registrado correctamente la asistencia debido a un error interno.
+                        {{error_message}}
                     </div>
                 </article>
                 {% endif%}
             {% endif %}
         </div>
+        {% if flag_already_marked %}
+        <div class="container is-max-desktop">
+            <div class="box"><p class="title">La asistencia fue ya marcada</p></div>
+        </div>
+        {% else %}
+        {% if success  %}
         <div class="container is-max-desktop">
             <form action="/asistencia/marcar/" method="POST">
                 <div class="box">
@@ -44,6 +50,9 @@
                     </div>
             </form>
         </div>
+        {% endif %}
+        {% endif %}
+
     </div>
     </form>
 </div>

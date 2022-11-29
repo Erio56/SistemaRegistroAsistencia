@@ -14,7 +14,7 @@
                <p class="title">#{{forloop.revcounter}}</p>
                <span class="tag is-success is-light is-medium mb-3"><strong>Fecha inicio:&#xA0;</strong>{{VacacionesEmpleado.fecha_inicio.date}} </span>
                {% if VacacionesEmpleado.is_past_due %}
-                  <span class="tag is-danger is-medium">Finalizó el día&#xA0;{{PermisoEmpleado.fecha_final.date}}</span>
+                  <span class="tag is-danger is-medium">Finalizó el día&#xA0;{{VacacionesEmpleado.fecha_final.date}}</span>
                {% else %}
                   <span class="tag is-info is-light is-medium"><strong class="is-white">Finaliza el día:&#xA0;</strong>{{VacacionesEmpleado.fecha_final.date}}</span>
                {% endif %}

@@ -70,9 +70,11 @@ def signIn(request):
 
 @login_required
 def createCargo(request):
+    epa = Empleado.objects.get(cuenta_usuario=request.user)
     if request.method == 'GET':
         return render(request, 'createCargo.html', {
             'form': createCargoForm,
+            'epa': epa
         })
     elif request.method == 'POST':
         try:
@@ -81,28 +83,29 @@ def createCargo(request):
             return render(request, 'createCargo.html', {
                 'form': createCargoForm,
                 'status': 'Registrado correctamente',
-                'epa': Empleado.objects.get(cuenta_usuario=request.user)
+                'epa': epa
             })
         except IntegrityError:
             return render(request, 'createCargo.html', {
                 'form': createCargoForm,
                 'status': 'Error: el cargo ya existe',
-                'epa': Empleado.objects.get(cuenta_usuario=request.user)
+                'epa': epa
             })
     else:
         return render(request, 'createCargo.html', {
             'form': createCargoForm,
             'status': 'Hubo un error en el sistema.',
-            'epa': Empleado.objects.get(cuenta_usuario=request.user)
+            'epa': epa
         })
         
         
 @login_required
 def createDependencia(request):
+    epa = Empleado.objects.get(cuenta_usuario=request.user)
     if request.method == 'GET':
         return render(request, 'createDependencia.html', {
             'form': createDependenciaForm,
-            'epa': Empleado.objects.get(cuenta_usuario=request.user)
+            'epa': epa
         })
     elif request.method == 'POST':
         try:
@@ -111,19 +114,19 @@ def createDependencia(request):
             return render(request, 'createDependencia.html', {
                 'form': createDependenciaForm,
                 'status': 'Registrado correctamente',
-                'epa': Empleado.objects.get(cuenta_usuario=request.user)
+                'epa': epa
             })
         except IntegrityError:
             return render(request, 'createDependencia.html', {
                 'form': createDependenciaForm,
                 'status': 'Error: el cargo ya existe',
-                'epa': Empleado.objects.get(cuenta_usuario=request.user)
+                'epa': epa
             })
     else:
         return render(request, 'createDependencia.html', {
             'form': createDependenciaForm,
             'status': 'Hubo un error en el sistema.',
-            'epa': Empleado.objects.get(cuenta_usuario=request.user)
+            'epa': epa
         })
         
         

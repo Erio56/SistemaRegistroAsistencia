@@ -43,17 +43,18 @@
         </div>
 
 
-        <!-admin navbar menu--> 
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">Admin</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="/admin/createCargo">Crear cargo</a>
-            <a class="navbar-item" href="/admin/createDependencia">Crear dependencia</a>
-          </div>
-        </div>
+    {% if epa.cargo.nombre_cargo == 'Admin'%}
+    <!-admin navbar menu--> 
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">Admin</a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" href="/admin/createCargo">Crear cargo</a>
+        <a class="navbar-item" href="/admin/createDependencia">Crear dependencia</a>
       </div>
-
-
+    </div>
+    
+    {% endif %}
+  </div>
     <div class="navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-item"><strong>{{epa.nombres|upper}} {{epa.apellidos|upper}}</strong></a>

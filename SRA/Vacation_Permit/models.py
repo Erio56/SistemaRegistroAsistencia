@@ -19,7 +19,6 @@ class PermisoEmpleado(models.Model):
         max_length=1,
         default='A'
         )
-    
     @property
     def is_past_due(self):
         resultado = timezone.now() > self.fecha_final
@@ -38,7 +37,6 @@ class VacacionesEmpleado(models.Model):
         max_length=1,
         default='A'
         )
-    
     @property
     def is_past_due(self):
         resultado = timezone.now() > self.fecha_final
