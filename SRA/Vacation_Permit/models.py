@@ -23,9 +23,6 @@ class PermisoEmpleado(models.Model):
     @property
     def is_past_due(self):
         resultado = timezone.now() > self.fecha_final
-        print(timezone.now())
-        print(self.fecha_final)
-        print(resultado)
         return resultado
 
     
@@ -44,4 +41,5 @@ class VacacionesEmpleado(models.Model):
     
     @property
     def is_past_due(self):
-        return datetime.today() > self.fecha_final
+        resultado = timezone.now() > self.fecha_final
+        return resultado

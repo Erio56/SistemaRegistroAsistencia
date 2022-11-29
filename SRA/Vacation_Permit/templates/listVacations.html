@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container is-max-desktop mt-6">
+   <p class="title">Historial de vacaciones registradas en el sistema.</p>
+      {% if vacations|length == 0 %}
+        <div> <strong>No hay vacaciones registradas</strong></div>
+      {% else %}
+      {% for VacacionesEmpleado in vacations %}
+      <div class="box">
+         <div class="ml-3">
+            <div>
+               <p class="title">#{{forloop.revcounter}}</p>
+               <span class="tag is-success is-light is-medium mb-3"><strong>Fecha inicio:&#xA0;</strong>{{VacacionesEmpleado.fecha_inicio.date}} </span>
+               {% if VacacionesEmpleado.is_past_due %}
+                  <span class="tag is-danger is-medium">Finalizó el día&#xA0;{{PermisoEmpleado.fecha_final.date}}</span>
+               {% else %}
+                  <span class="tag is-info is-light is-medium"><strong class="is-white">Finaliza el día:&#xA0;</strong>{{VacacionesEmpleado.fecha_final.date}}</span>
+               {% endif %}
+            </div>
+            <span class="tag mt-4">
+               Registrado el {{VacacionesEmpleado.fecha_solicitud}}
+            </span>
+         </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+</div>
+
+{% endblock content %}

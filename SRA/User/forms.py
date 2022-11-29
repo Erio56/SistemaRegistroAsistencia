@@ -37,11 +37,9 @@ class CreateEmpleadoForm(forms.ModelForm):
         widgets = {
             'cuenta_usuario': forms.Select(attrs={
                 'class':'input',
-                # 'disabled': True
                 }),
             'cedula': forms.TextInput(attrs={
                 'class':'input',
-                # 'disabled': True
                 }),
             'nombres': forms.TextInput(attrs={
                 'class':'input'

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container is-max-desktop mt-6">
+   <p class="title">Registrar vacaciones</p>
+   {% if success %}
+      <article class="message is-success">
+         <div class="message-header">
+            <p>Epa guardado</p>
+         </div>
+         <div class="message-body">
+            Se ha registrado <strong>correctamente</strong> el permiso.
+         </div>
+      </article>
+   {% endif %}
+   <form action="/vacacion/crear" method="POST">
+      <div class="box">
+         {% csrf_token %}
+         {{form.as_div}}
+      </div>
+      <div class="buttons is-centered">
+         <button class="button is-primary">Registrar vacaciones</button>
+      </div>
+   </form>
+</div>
+{% endblock %}
