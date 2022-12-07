@@ -22,13 +22,13 @@ class Asistencia_Empleado(models.Model):
 class Hora(models.Model):
     hora_entrada = models.TimeField(
         default = None,
-        null = True,
-        blank = False
+        null = False,
+        blank = True
         )
     hora_salida = models.TimeField(
         default = None,
-        null = True,
-        blank = False
+        null = False,
+        blank = True
         )
 
 class Horario(models.Model):
@@ -62,4 +62,3 @@ class Horario(models.Model):
                 return self.domingo
             case _:
                 return None
-    

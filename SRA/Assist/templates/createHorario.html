@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container is-max-desktop mt-6 mb-4"><p class="title">Horario</p></div>
+<div class="container is-max-desktop">
+   <div class="box">
+      <form action="/horario/crear" method="POST">
+      {% csrf_token %}
+      <div class="box"> <strong>Lunes</strong>{{formLunes.as_div}}</div>
+      <div class="box"> <strong>Martes</strong>{{formMartes.as_div}}</div>
+      <div class="box"> <strong>Miércoles</strong>{{formMiercoles.as_div}}</div>
+      <div class="box"> <strong>Jueves</strong>{{formJueves.as_div}}</div>
+      <div class="box"> <strong>Viernes</strong>{{formViernes.as_div}}</div>
+      <div class="box"> <strong>Sábado</strong>{{formSabado.as_div}}</div>
+      <div class="box"> <strong>Domingo</strong>{{formDomingo.as_div}}</div>
+      <div class="buttons is-centered">
+         <button class="button is-primary">
+            Crear
+         </button>
+      </div>
+      </form>
+   </div>
+</div>
+
+{% endblock %}

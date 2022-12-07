@@ -4,9 +4,11 @@ from django.db import IntegrityError, OperationalError
 from django.contrib.auth.decorators import login_required
 
 from Assist.models import Asistencia_Empleado
-from .forms import createAsistenciaForm
-from .models import Horario, Asistencia_Empleado
+from .forms import createAsistenciaForm, createHoraForm
+from .models import Horario, Asistencia_Empleado, Horario
 from User.models import Empleado
+from Assist.models import Hora, Horario
+from .utils import str_to_time
 
 import datetime
 from django.utils import timezone
@@ -71,4 +73,68 @@ def listAsistencias(request):
     assists = Asistencia_Empleado.objects.filter( cedula = Empleado.objects.get(cuenta_usuario=request.user)).order_by('-fecha_hora_asitencia')
     epa = Empleado.objects.get(cuenta_usuario=request.user)
     return render(request, 'listAsistencia.html', {'Asistencias': assists,
-                                                   'epa': epa })
+                                                   'epa': epa})
+
+def create_horario(request):
+    epa = Empleado.objects.get(cuenta_usuario=request.user)
+    if request.method == 'GET':
+        return render(request, 'createHorario.html',{
+            'formLunes': createHoraForm,
+            'formMartes': createHoraForm,
+            'formMiercoles': createHoraForm,
+            'formJueves': createHoraForm,
+            'formViernes': createHoraForm,
+            'formSabado': createHoraForm,
+            'formDomingo': createHoraForm,
+            'epa': epa
+        })
+    if request.method == 'POST':
+        hora_entradas = request.POST.getlist('hora_entrada')
+        hora_salidas = request.POST.getlist('hora_salida')
+        horario = Horario()
+        for i in range(0,7):
+            hora_entrada = str_to_time(hora_entradas[i])
+            hora_salida = str_to_time(hora_salidas[i])
+            if hora_entrada != None and hora_salida != None:
+                if hora_salida <= hora_salida:
+                    if i == 0:
+                        h = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h.save()
+                        horario.lunes = h
+                    elif i == 1:
+                        h1 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h1.save()
+                        horario.martes = h1
+                    elif i == 2:
+                        h2 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h2.save()
+                        horario.miercoles = h2
+                    elif i == 3:
+                        h3 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h3.save()
+                        horario.jueves = h3
+                    elif i == 4:
+                        h4 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h4.save()
+                        horario.viernes = h4
+                    elif i == 5:
+                        h5 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h5.save()
+                        horario.sabado = h5
+                    elif i == 6:
+                        h6 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
+                        h6.save()
+                        horario.domingo = h6
+        horario.empleado = epa
+        horario.save()
+        
+        return render(request, 'createHorario.html', {
+            'formLunes': createHoraForm,
+            'formMartes': createHoraForm,
+            'formMiercoles': createHoraForm,
+            'formJueves': createHoraForm,
+            'formViernes': createHoraForm,
+            'formSabado': createHoraForm,
+            'formDomingo': createHoraForm,
+            'epa': epa
+        })
