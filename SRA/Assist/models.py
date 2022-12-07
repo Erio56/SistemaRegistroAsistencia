@@ -9,6 +9,7 @@ class Asistencia_Empleado(models.Model):
     cedula = models.ForeignKey(Empleado, on_delete=models.DO_NOTHING, related_name="fk_asistencia_cedula")
     fecha_hora_asitencia = models.DateTimeField(auto_now_add=True)
     llegaTarde = models.BooleanField(default=False)
+    falta = models.BooleanField(default=False)
     observacion = models.CharField(
         unique=False, 
         null=True,
