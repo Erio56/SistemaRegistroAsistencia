@@ -8,7 +8,7 @@ from .forms import createAsistenciaForm, createHoraForm
 from .models import Horario, Asistencia_Empleado, Horario
 from User.models import Empleado
 from Assist.models import Hora, Horario
-from .utils import str_to_time
+from .utils import str_to_time, needsToAssist, getDay
 
 import datetime
 from django.utils import timezone
@@ -41,10 +41,15 @@ def create_asistencia(request):
             })
     if request.method == 'POST':
         try:
+            # horario = Horario.objects.filter(empleado=epa)
+            # dia = getDay(horario)
+            # result = needsToAssist(dia.hora_entrada, dia.hora_salida)
+            # if result:
             now = timezone.now()
             now = now.replace(hour=0, minute=0, second=0, microsecond=0)
             assists = Asistencia_Empleado.objects.filter(cedula=epa)
             assists.filter(fecha_hora_asitencia__gte=now)
+            # assists = assists.filter(falta=True)
             if assists.count() != 0:
                 return render(request, 'createAsistencia.html',{
                 'epa': epa,
@@ -62,6 +67,7 @@ def create_asistencia(request):
                 'success': True
             })
         except Exception as e:
+            print(e)
             return render(request, 'createAsistencia.html',{
                 'epa': epa,
                 'form': createAsistenciaForm,
@@ -95,10 +101,8 @@ def create_horario(request):
         for i in range(0,7):
             hora_entrada = str_to_time(hora_entradas[i])
             hora_salida = str_to_time(hora_salidas[i])
-            print(hora_entrada)
-            print(hora_salida)
             if hora_entrada != None and hora_salida != None:
-                if hora_salida <= hora_salida:
+                if hora_entrada <= hora_salida:
                     if i == 0:
                         h = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
                         h.save()
@@ -127,9 +131,21 @@ def create_horario(request):
                         h6 = Hora(hora_entrada=hora_entrada,hora_salida=hora_salida)
                         h6.save()
                         horario.domingo = h6
+                else:
+                    return render(request, 'createHorario.html', {
+                    'formLunes': createHoraForm,
+                    'formMartes': createHoraForm,
+                    'formMiercoles': createHoraForm,
+                    'formJueves': createHoraForm,
+                    'formViernes': createHoraForm,
+                    'formSabado': createHoraForm,
+                    'formDomingo': createHoraForm,
+                    'epa': epa,
+                    'success': False,
+                    'error_msg': "La hora que finaliza el día no debe ser superior a la hora de inicio"
+                })
         horario.empleado = epa
         horario.save()
-        
         return render(request, 'createHorario.html', {
             'formLunes': createHoraForm,
             'formMartes': createHoraForm,
@@ -138,5 +154,8 @@ def create_horario(request):
             'formViernes': createHoraForm,
             'formSabado': createHoraForm,
             'formDomingo': createHoraForm,
-            'epa': epa
+            'epa': epa,
+            'success': True,
         })
+
+        

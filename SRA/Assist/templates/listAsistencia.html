@@ -12,7 +12,12 @@
         <div class="box">
             {% if Asistencias|length != 0 %}
             {% for empleado in Asistencias %}
-            <h1 class="block">✅ {{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}}
+            <h1 class="block"> 
+                {% if empleado.falta %}
+                ❌<strong>FALTA </strong>{{empleado.fecha_hora_asitencia.date}}
+                {% else %}
+                ✅{{empleado.fecha_hora_asitencia.date}} a las {{empleado.fecha_hora_asitencia.time}}
+                {% endif %}
                 {% if empleado.observacion != "" %}
                 <strong>- Observación: </strong>{{empleado.observacion}}
                 {% endif %}

@@ -44,7 +44,7 @@ ALLOWED_HOSTS = []
 
 #Crontab task handler
 CRONJOBS = [
-    ('0 0 * * *', 'Assist.cron.poner_faltas')
+    ('38 6 * * *', 'Assist.cron.poner_faltas')
 ]
 
 

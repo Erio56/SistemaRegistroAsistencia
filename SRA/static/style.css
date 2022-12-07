@@ -7,3 +7,11 @@
 .section {
 flex: 1;
 }
+
+.image2 img {
+  width: 300px !important; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
