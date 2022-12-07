@@ -30,17 +30,16 @@ def signUp(request):
         })
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
-                user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
-                formu = CreateEmpleadoForm(request.POST)
-                formu.is_valid()
-                form = formu.cleaned_data
-                empleado_temp = Empleado(cedula=form['cedula'], cuenta_usuario=user, nombres=form['nombres'], apellidos=form['apellidos'],
-                                             direccion=form['direccion'], telefono=form['telefono'], fecha_nacimiento=form['fecha_nacimiento'])
-                empleado_temp.save()
-                login(request, user)
-                return redirect('home')
-
-    user.delete()
+            user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+            formu = CreateEmpleadoForm(request.POST)
+            formu.is_valid()
+            form = formu.cleaned_data
+            empleado_temp = Empleado(cedula=form['cedula'], cuenta_usuario=user, nombres=form['nombres'], apellidos=form['apellidos'],
+                                            direccion=form['direccion'], telefono=form['telefono'], fecha_nacimiento=form['fecha_nacimiento'], email=form['email'])
+            empleado_temp.save()
+            login(request, user)
+            return redirect('home')
+        user.delete()#T
     return render(request, 'signup.html', {
                         'form': CustomUserCreationForm,
                         'form2': CreateEmpleadoForm,
@@ -151,7 +150,6 @@ def updateUser(request):
                     'epa': empleado
                     })
                 else:
-                    print(form2.cleaned_data)
                     error = form2.errors
                     return render(request, 'userUpdate.html', {
                         'error': error,

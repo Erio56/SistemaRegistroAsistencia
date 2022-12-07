@@ -7,9 +7,8 @@
 
 <div class="container is-max-desktop mt-6">
    <p class="title">{{epa.nombres|upper}} Permisos registrados.</p>
-   <div class="box">
       {% if permits|length == 0 %}
-        <div> <strong>No hay permisos registrados</strong></div>
+        <div>No hay permisos registrados</div>
       {% else %}
       {% for PermisoEmpleado in permits %}
       <div class="box">

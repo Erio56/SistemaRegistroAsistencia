@@ -3,15 +3,24 @@
 {% block content %}
 <div class="container is-max-desktop mt-6">
    <p class="title">Registrar vacaciones</p>
-   {% if success %}
+   {% if success != None %}
+         {% if success %}
       <article class="message is-success">
          <div class="message-header">
             <p>Epa guardado</p>
          </div>
          <div class="message-body">
-            Se ha registrado <strong>correctamente</strong> el permiso.
+            Se han registrado <strong>correctamente</strong> las vacaciones.
          </div>
       </article>
+   {% else %}
+   <article class="message is-danger">
+      <div class="message-body">
+         Se han registrado <strong>incorrectamente </strong> las vacaciones.
+         <div><strong>Razón: </strong>{{error_msg}}.</div>
+      </div>
+   </article>
+   {% endif %}
    {% endif %}
    <form action="/vacacion/crear" method="POST">
       <div class="box">

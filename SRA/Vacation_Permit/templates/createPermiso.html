@@ -1,26 +1,36 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="container is-max-desktop mt-6">
-   <p class="title">Registrar un permiso</p>
-   {% if success %}
-      <article class="message is-success">
-         <div class="message-header">
+  <div class="container is-max-desktop mt-6">
+    <p class="title">Registrar un permiso</p>
+    {% if success != None %}
+      {% if success %}
+        <article class="message is-success">
+          <div class="message-header">
             <p>Epa guardado</p>
-         </div>
-         <div class="message-body">
+          </div>
+          <div class="message-body">
             Se ha registrado <strong>correctamente</strong> el permiso.
-         </div>
-      </article>
-   {% endif %}
-   <form action="/permiso/crear" method="POST">
+          </div>
+        </article>
+      {% else %}
+        <article class="message is-danger">
+          <div class="message-body">
+            Se ha registrado <strong>incorrectamente</strong> el permiso.<div>
+              <strong>Razón: </strong>{{ error_msg }}.
+            </div>
+          </div>
+        </article>
+      {% endif %}
+    {% endif %}
+    <form action="/permiso/crear" method="POST">
       <div class="box">
-         {% csrf_token %}
-         {{form.as_div}}
+        {% csrf_token %}
+        {{ form.as_div }}
       </div>
       <div class="buttons is-centered">
-         <button class="button is-primary">Registrar permiso</button>
+        <button class="button is-primary">Registrar permiso</button>
       </div>
-   </form>
-</div>
+    </form>
+  </div>
 {% endblock %}

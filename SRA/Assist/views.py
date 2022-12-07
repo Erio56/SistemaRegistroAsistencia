@@ -29,7 +29,7 @@ def create_asistencia(request):
             'epa': epa,
             'flag_already_marked': True,
             'success': True,
-            'home_flag': True
+            'home_flag': True 
             })
         else:            
             return render(request, 'createAsistencia.html', {
@@ -65,7 +65,6 @@ def create_asistencia(request):
                 'form': createAsistenciaForm,
                 'success': False
             })
-
 
 @login_required
 def listAsistencias(request):
