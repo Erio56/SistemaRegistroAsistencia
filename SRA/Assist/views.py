@@ -95,6 +95,8 @@ def create_horario(request):
         for i in range(0,7):
             hora_entrada = str_to_time(hora_entradas[i])
             hora_salida = str_to_time(hora_salidas[i])
+            print(hora_entrada)
+            print(hora_salida)
             if hora_entrada != None and hora_salida != None:
                 if hora_salida <= hora_salida:
                     if i == 0:
